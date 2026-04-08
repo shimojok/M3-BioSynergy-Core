@@ -1,9 +1,6 @@
 # GHG_FieldData — Data Specification
 
-## 1. Overview
-Field measurements of greenhouse gases and soil conditions.
-
-## 2. Data Dictionary
+## 1. Data Dictionary
 
 | Column | Meaning | Units | Notes |
 |--------|---------|--------|-------|
@@ -14,15 +11,21 @@ Field measurements of greenhouse gases and soil conditions.
 | Temperature | Soil temperature | °C | Affects reaction rates |
 | Moisture | Soil water content | % | Feedback variable |
 
-## 3. Model Integration
+---
 
-- CH₄ → F_CH4  
-- CO₂ → F_CO2  
-- N₂O → F_N2O  
-- Temperature → modifies Vmax  
-- Moisture → modifies microbial growth  
+## 2. Model Integration
 
-## 4. Usage
-- Calibration of GHG reduction model  
-- MRV (Monitoring, Reporting, Verification)  
-- Climate finance quantification
+- **CH4_ppm** → methane flux model（F_CH4）
+- **CO2_ppm** → CO₂ exchange model（F_CO2）
+- **N2O_ppm** → nitrogen flux model（F_N2O）
+- **Temperature** → modifies enzyme Vmax and microbial growth rate
+- **Moisture** → modifies microbial growth and soil–atmosphere exchange
+
+---
+
+## 3. Usage
+
+- Calibration of greenhouse gas reduction models  
+- MRV（Monitoring, Reporting, Verification）  
+- Climate finance quantification（carbon credits）  
+- Validation of hypercycle simulation outputs  
