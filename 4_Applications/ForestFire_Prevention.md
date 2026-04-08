@@ -1,10 +1,25 @@
-# Forest Fire Prevention Application
+# Forest Fire Prevention — Full Specification
 
-## Purpose
-Use MBT55-driven decomposition and moisture retention to reduce fire risk.
+## 1. Introduction
+MBT55 accelerates decomposition and increases soil moisture, reducing fire risk.
 
-## Topics
-- Litter decomposition acceleration
-- Soil moisture retention
-- Fire risk index modeling
-- Field deployment strategy
+---
+
+## 2. Mechanisms
+- Faster litter decomposition → less fuel load
+- Higher soil moisture → lower ignition probability
+- Improved soil structure → reduced runoff
+
+---
+
+## 3. Deployment
+- Aerial spray (helicopter or drone)
+- Ground application in fire-prone zones
+- Integration with forest management plans
+
+---
+
+## 4. Outcomes
+- 20–50% reduction in fuel load
+- 10–25% increase in soil moisture
+- Lower fire intensity and spread rate
