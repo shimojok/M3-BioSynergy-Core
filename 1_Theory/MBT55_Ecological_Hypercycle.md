@@ -83,33 +83,6 @@ These loops create a **self-reinforcing metabolic engine**.
 
 The hypercycle is modeled using coupled differential equations:
 
-[ \frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right) + \alpha S ]
-
-[ \frac{dS}{dt} = -k_1 S - k_2 S N ]
-
-[ \frac{dC}{dt} = \beta N + \gamma S ]
-
-[ \frac{dN_2}{dt} = \delta N - \epsilon N_2 ]
-
-Where:
-
-- (N) = microbial biomass
-- (S) = substrate concentration
-- (C) = carbon flux
-- (N_2) = nitrogen flux
-- (r, K, \alpha, k_1, k_2, \beta, \gamma, \delta, \epsilon) = system parameters
-
-This model captures:
-
-- Logistic microbial growth
-- Enzyme-driven substrate decay
-- Carbon–nitrogen flux coupling
-- Feedback amplification
-
-### **5. Mathematical Model**
-
-The hypercycle is modeled using coupled differential equations:
-
 $$ \frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right) + \alpha S $$
 
 $$ \frac{dS}{dt} = -k_1 S - k_2 S N $$
