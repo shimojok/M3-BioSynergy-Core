@@ -1,0 +1,6 @@
+Microbe,Relative_Abundance,Function
+Bacillus_sp,0.25,Oxidizer / enzyme producer
+Pseudomonas_sp,0.18,Redox cycling / pollutant degradation
+Actinomycetes,0.12,Decomposer / carbon mineralization
+Yeast,0.10,Fermentation / nutrient release
+Others,0.35,Auxiliary metabolic support
