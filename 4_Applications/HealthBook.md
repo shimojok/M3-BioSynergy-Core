@@ -1,10 +1,19 @@
-# HealthBook Application
+# HealthBook — Environmental Health Integration
 
-## Purpose
-Integrating microbial ecological principles into human health monitoring and environmental exposure modeling.
+## 1. Purpose
+Connects environmental microbiome data with human health indicators.
 
-## Topics
-- Environmental microbiome mapping
-- Exposure–response modeling
+---
+
+## 2. Components
 - Soil–food–health linkage
-- Digital health integration
+- Exposure modeling
+- Environmental risk scoring
+- Integration with digital health platforms
+
+---
+
+## 3. Use Cases
+- Public health monitoring
+- Agricultural worker exposure
+- Urban environmental health
