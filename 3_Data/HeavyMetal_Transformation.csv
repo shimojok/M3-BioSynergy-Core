@@ -1,0 +1,5 @@
+Metal,Initial_mg_per_kg,After_30d_mg_per_kg,Reduction_Rate,Mechanism
+Cd,2.1,0.8,0.62,Enzyme-assisted chelation
+Pb,15.0,6.2,0.59,Reductive transformation
+As,4.5,1.9,0.58,Microbial redox cycling
+Cr,8.0,3.1,0.61,Electron transfer reduction
