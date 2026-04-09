@@ -36,36 +36,36 @@ These changes reduce:
 ### 5.1 Soil Carbon
 
 
-\[
+$$
 \Delta C = C_{project} - C_{baseline}
-\]
+$$
 
 
 
 ### 5.2 Methane Reduction
 
 
-\[
+$$
 ER_{CH_4} = (CH4_{baseline} - CH4_{project}) \times GWP_{CH_4}
-\]
+$$
 
 
 
 ### 5.3 Nitrous Oxide Reduction
 
 
-\[
+$$
 ER_{N_2O} = (N2O_{baseline} - N2O_{project}) \times GWP_{N_2O}
-\]
+$$
 
 
 
 ### 5.4 Total Credits
 
 
-\[
+$$
 Credits = \Delta C + ER_{CH_4} + ER_{N_2O}
-\]
+$$
 
 
 
