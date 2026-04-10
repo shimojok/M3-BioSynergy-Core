@@ -1,3 +1,5 @@
+![M3-BioSynergy-Core Banner](assets/banner.png)
+
 # **M3‑BioSynergy‑Core**
 
 ### _The Core Engine of the Planetary Metabolic Operating System (Planetary OS)_
