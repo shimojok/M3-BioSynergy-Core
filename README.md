@@ -155,7 +155,181 @@ WhitePaper/WhitePaper.md
 
 ---
 
-# **📩 Contact**
+## **📩 Contact**
 
 **Kaz Shimojo**  
 Co-Founder & Chief Architect, BioNexus Holdings
+
+---
+---
+
+# 📘 **Soil–Carbon–Finance Dashboard (Streamlit Application)**
+
+_A Planetary OS Soil Module Demonstration_
+
+The **Soil–Carbon–Finance Dashboard** is an interactive Streamlit application that visualizes:
+
+- Soil carbon dynamics
+- MBT55 project scenarios
+- Carbon sequestration
+- Yield improvement
+- Green Premium (climate finance)
+- MRV (Measurement, Reporting, Verification)
+- Planetary OS Soil Module Export (standardized JSON)
+
+This dashboard is fully bilingual (**English ↔ Japanese**) and is designed for:
+
+- Researchers
+- Climate finance analysts
+- Regenerative agriculture projects
+- Government proposal teams
+- Planetary OS integration partners
+
+---
+
+## 🌍 **Features**
+
+### **1. Overview (Baseline vs MBT55 Scenario)**
+
+- Annual carbon sequestration
+- Additional sequestration (difference)
+- Carbon credit revenue
+- Total Green Premium
+
+### **2. Soil & Microbes**
+
+- SOC (Soil Organic Carbon)
+- Microbial biomass
+- Substrate
+- Soil stability
+
+### **3. Carbon Module**
+
+- Annual carbon sequestration flow
+- Baseline vs MBT55 comparison
+
+### **4. Finance Module**
+
+- Carbon credit revenue
+- Yield improvement revenue
+- Total Green Premium
+- Project-level aggregation
+
+### **5. MRV Module**
+
+- Upload observed CSV/Excel
+- Automatic alignment with model output
+- RMSE, Bias, R²
+- Full MRV JSON report
+
+### **6. Planetary OS Export**
+
+- Generates standardized JSON for  
+    **Planetary OS Soil Module**
+- Includes baseline, project, and scenario metadata
+
+---
+
+## 🔤 **Language Switching (English ↔ Japanese)**
+
+The dashboard includes a built‑in language toggle:
+
+```
+[ 日本語 ]   [ English ]
+```
+
+All UI elements switch instantly:
+
+- Sidebar
+- Tabs
+- Metrics
+- Charts
+- MRV labels
+- Export descriptions
+
+---
+
+## 🚀 **How to Run the Dashboard**
+
+### **1. Install dependencies**
+
+```
+pip install streamlit pandas numpy
+```
+
+### **2. Run the app**
+
+```
+streamlit run app.py
+```
+
+### **3. Open in browser**
+
+Streamlit will show:
+
+```
+Local URL: http://localhost:8501
+```
+
+Click to open.
+
+---
+
+## 📁 **File Structure**
+
+```
+app.py                     # Unified bilingual dashboard
+core_model.py              # Soil carbon model
+mrv.py                     # MRV engine
+planetary_os_adapter.py    # Planetary OS JSON export
+```
+
+---
+
+## 🧠 **Model Logic**
+
+The dashboard runs two scenarios:
+
+- **Baseline** (mbt_dose = 0.0)
+- **Project (MBT55)** (mbt_dose = user-defined)
+
+Outputs include:
+
+- SOC
+- Carbon sequestration
+- Yield
+- Microbial biomass
+- Substrate
+- Soil stability
+
+---
+
+## 🌐 **Planetary OS Integration**
+
+The dashboard exports a JSON structure compatible with:
+
+- **Planetary OS Soil Module**
+- **UNFCCC-aligned climate finance workflows**
+- **PBPE tokenization**
+- **Claim Engine architecture**
+
+This ensures interoperability with:
+
+- Governments
+- Research institutions
+- Carbon registries
+- Planetary OS Core
+
+---
+
+## 📸 **Screenshots (to be added)**
+
+You can add screenshots here:
+
+```
+assets/dashboard_overview.png
+assets/dashboard_soil.png
+assets/dashboard_mrv.png
+assets/dashboard_export.png
+```
+
