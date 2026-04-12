@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 
 from core_model import run_soil_carbon_model
+from mrv import compare_model_vs_observed, generate_mrv_report
+from planetary_os_adapter import export_soil_module_state
 
 st.set_page_config(page_title="Soil–Carbon–Finance Dashboard", layout="wide")
 
@@ -50,7 +52,9 @@ df_baseline = pd.DataFrame(baseline)
 df_project = pd.DataFrame(project)
 
 df_diff = df_project.copy()
-df_diff["sequestration_diff"] = df_project["sequestration_tco2e_ha_yr"] - df_baseline["sequestration_tco2e_ha_yr"]
+df_diff["sequestration_diff"] = (
+    df_project["sequestration_tco2e_ha_yr"] - df_baseline["sequestration_tco2e_ha_yr"]
+)
 df_diff["yield_diff"] = df_project["yield_t_ha"] - df_baseline["yield_t_ha"]
 
 # 年次合計・平均など
@@ -70,10 +74,13 @@ total_green_premium = annual_green_premium_carbon_total + annual_green_premium_y
 # -----------------------
 # レイアウト
 # -----------------------
-tab_overview, tab_soil, tab_carbon, tab_finance = st.tabs(
-    ["📊 Overview", "🦠 土壌・微生物", "🌿 炭素隔離", "💰 グリーンプレミアム"]
+tab_overview, tab_soil, tab_carbon, tab_finance, tab_mrv, tab_export = st.tabs(
+    ["📊 Overview", "🦠 土壌・微生物", "🌿 炭素隔離", "💰 グリーンプレミアム", "📑 MRV", "🚀 Export"]
 )
 
+# -----------------------
+# Overview
+# -----------------------
 with tab_overview:
     st.subheader("現状 vs MBT55 導入後：サマリー")
 
@@ -105,6 +112,9 @@ with tab_overview:
     st.markdown("### 追加隔離量（MBT55 - Baseline）")
     st.area_chart(df_diff.set_index("year")[["sequestration_diff"]])
 
+# -----------------------
+# Soil
+# -----------------------
 with tab_soil:
     st.subheader("土壌炭素ストック：Baseline vs MBT55")
     soil_df = pd.DataFrame({
@@ -114,10 +124,30 @@ with tab_soil:
     }).set_index("Year")
     st.line_chart(soil_df)
 
+    st.markdown("### 土壌生態（微生物・基質・安定性）")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.line_chart(
+            df_project.set_index("year")[["microbial_biomass"]],
+        )
+        st.line_chart(
+            df_project.set_index("year")[["substrate"]],
+        )
+    with col2:
+        st.line_chart(
+            df_project.set_index("year")[["soil_stability"]],
+        )
+
+# -----------------------
+# Carbon
+# -----------------------
 with tab_carbon:
     st.subheader("炭素隔離フロー（年次）")
     st.line_chart(chart_df)
 
+# -----------------------
+# Finance
+# -----------------------
 with tab_finance:
     st.subheader("グリーンプレミアム内訳")
 
@@ -139,3 +169,72 @@ with tab_finance:
     st.markdown("#### 総グリーンプレミアム")
     st.write(f"**{total_green_premium:,.0f} USD/yr**")
     st.caption("※ 単純化した試算モデル。実際のプロジェクトでは MRV・リーケージ・追加性等の精緻化が必要。")
+
+# -----------------------
+# MRV
+# -----------------------
+with tab_mrv:
+    st.header("📑 MRV（Measurement, Reporting, Verification）")
+
+    st.markdown("### 実測データのアップロード")
+    uploaded_file = st.file_uploader("CSV または Excel をアップロード", type=["csv", "xlsx"])
+
+    if uploaded_file:
+        try:
+            if uploaded_file.name.endswith(".csv"):
+                obs_df = pd.read_csv(uploaded_file)
+            else:
+                obs_df = pd.read_excel(uploaded_file)
+
+            st.success("データを読み込みました。")
+            st.dataframe(obs_df.head())
+
+            # モデル出力を MRV 用に列名を揃える
+            model_for_mrv = df_project.rename(
+                columns={
+                    "soc_tC_ha": "soc_tC_ha_model",
+                    "sequestration_tco2e_ha_yr": "sequestration_tco2e_ha_yr_model",
+                    "yield_t_ha": "yield_t_ha_model",
+                }
+            )
+
+            obs_for_mrv = obs_df.rename(
+                columns={
+                    "soc_tC_ha": "soc_tC_ha_obs",
+                    "sequestration_tco2e_ha_yr": "sequestration_tco2e_ha_yr_obs",
+                    "yield_t_ha": "yield_t_ha_obs",
+                }
+            )
+
+            stats = compare_model_vs_observed(model_for_mrv, obs_for_mrv)
+
+            st.markdown("### 指標")
+            st.write("**RMSE (SOC)**:", stats.get("rmse_soc"))
+            st.write("**Bias (SOC)**:", stats.get("bias_soc"))
+            st.write("**R² (SOC)**:", stats.get("r2_soc"))
+            st.write("**RMSE (Flux)**:", stats.get("rmse_flux"))
+            st.write("**RMSE (Yield)**:", stats.get("rmse_yield"))
+
+            st.markdown("### MRV レポート（JSON）")
+            report = generate_mrv_report(model_for_mrv, obs_for_mrv, stats)
+            st.json(report)
+
+        except Exception as e:
+            st.error(f"データ読み込みエラー: {e}")
+
+# -----------------------
+# Export
+# -----------------------
+with tab_export:
+    st.header("🚀 Planetary OS Export")
+
+    st.markdown("### Soil Module State (Planetary OS Format)")
+
+    export_data = export_soil_module_state(
+        df_baseline,
+        df_project,
+        {**common_params, "mbt_dose": mbt_dose_project},
+    )
+
+    st.json(export_data)
+    st.caption("Planetary OS Core に渡すための標準化フォーマット。")
